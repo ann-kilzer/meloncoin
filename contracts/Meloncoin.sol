@@ -1,5 +1,9 @@
 pragma solidity ^0.4.24;
 
+// Meloncoin
+// Author: Ann Kilzer
+// akilzer@gmail.com
+
 import './Fruit.sol';
 import './ERC20Interface.sol';
 
@@ -21,20 +25,18 @@ contract Meloncoin is Fruit, ERC20Interface {
     // This is a map of owners to spenders to allowance
     mapping (address => mapping (address => uint)) public allowance;
     
-    constructor(
-        uint _initialSupply,
-        uint _plantDate, // When the melons are planted
-        uint8 _growingPeriod, // How long the melons take to grow in days
-        uint8 _ripePeriod, // The shelf life of the melons in days
-	address _initialOwner // Who gets the coins
-    ) Fruit (
-        _plantDate,
-        _growingPeriod,
-        _ripePeriod
-    ) public {
-        totalSupply = _initialSupply * 10 ** uint(decimals);
-        balanceOf[_initialOwner] = totalSupply;
-	emit Transfer(0x0, _initialOwner, totalSupply);
+    constructor(uint _initialSupply,
+                uint _plantDate, // When the melons are planted
+                uint8 _growingPeriod, // How long the melons take to grow in days
+                uint8 _ripePeriod, // The shelf life of the melons in days
+                address _initialOwner // Who gets the coins
+                ) Fruit (_plantDate,
+                         _growingPeriod,
+                         _ripePeriod
+                         ) public {
+      totalSupply = melonToMusk(_initialSupply);
+      balanceOf[_initialOwner] = totalSupply;
+      emit Transfer(0x0, _initialOwner, totalSupply);
     }
 
     // You can only burn entire melons when they are ripe.
@@ -47,6 +49,11 @@ contract Meloncoin is Fruit, ERC20Interface {
         totalSupply -= value;
         emit Burn(msg.sender, _melons, value);
         return true;
+    }
+
+    // todo: risk of overflow, be careful!
+    function melonToMusk(uint _melons) public view returns (uint) {
+      return _melons * 10 ** uint(decimals);
     }
 
     function totalSupply() public view returns (uint) {

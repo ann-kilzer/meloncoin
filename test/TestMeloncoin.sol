@@ -1,5 +1,9 @@
 pragma solidity ^0.4.24;
 
+// Meloncoin
+// Author: Ann Kilzer
+// akilzer@gmail.com
+
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
 import "../contracts/Meloncoin.sol";
@@ -27,16 +31,29 @@ contract TestMeloncoin {
     Assert.equal(melon.balanceOf(this), supply, "Owner should have all the meloncoin initially");
   }
 
-  //function testBurn() public {
-    // todo you can only call this one when it's ripe :/
-  //}
+  // Since we can only burn when the melon is ripe, make a melon planted in the past
+  function testBurn() public {
+    MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
+
+    // This will be right in the middle of the ripe period
+    uint pastPlantDate = now - 95 days;
+    Meloncoin melon = farm.launchMeloncoin(melons, pastPlantDate, 90, 10);
+
+    uint myBalance = melon.balanceOf(this);    
+    Assert.equal(myBalance, supply, "Initial supply of main address");
+    
+    melon.burn(1);
+
+    uint expectedBalance = melon.melonToMusk(2);
+    uint actualBalance = melon.balanceOf(this);
+    Assert.equal(actualBalance, expectedBalance, "Balance after burning 1 melon");
+  }
   
   function testBalanceOf() public {
     MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
     Meloncoin melon = farm.launchMeloncoin(melons, plantDate, 90, 20);
     
-    uint myBalance = melon.balanceOf(this);
-    
+    uint myBalance = melon.balanceOf(this);    
     Assert.equal(myBalance, supply, "Initial supply of main address");
 
     uint foxBalance = melon.balanceOf(fox);
