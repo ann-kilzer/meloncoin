@@ -9,6 +9,7 @@ import "truffle/DeployedAddresses.sol";
 import "../contracts/Meloncoin.sol";
 import "../contracts/MelonFarm.sol";
 import "./ThrowProxy.sol";
+import "./MelonSpenderProxy.sol";
 
 contract TestMeloncoin {
 
@@ -60,7 +61,7 @@ contract TestMeloncoin {
     Assert.equal(foxBalance, 0, "Other addresses start with 0");
   }
 
-  function testAllowance() public {
+  function testAllowanceAndApprove() public {
     MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
     Meloncoin melon = farm.launchMeloncoin(melons, plantDate, 90, 20);
     
@@ -131,11 +132,23 @@ contract TestMeloncoin {
 
   }
 
-  //function testApprove() public {
-    // todo
-  //}
+  // Not sure if I can test this one without switching accounts...
+  function testTransferFrom() public {
+    MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
+    Meloncoin melon = farm.launchMeloncoin(melons, plantDate, 90, 20);
+    
+    uint tokens = 1999;
 
-  //function testTransferFrom() public {
+    MelonSpenderProxy spender = new MelonSpenderProxy();
+    address spenderAddr = address(spender);
+    
+    melon.approve(spenderAddr, tokens);
 
-  //}
+    // Sanity checks
+    Assert.equal(melon.balanceOf(this), melon.melonToMusk(melons), "We have the melons");
+    Assert.notEqual(this, spenderAddr, "Spender proxy has a different address");
+    Assert.equal(melon.allowance(this, spenderAddr), tokens, "Spender proxy has an allowance");
+    
+    Assert.isTrue(spender.spendMelonAllowance(melon, this, fox, 11), "TransferFrom proxy");
+  }
 }
