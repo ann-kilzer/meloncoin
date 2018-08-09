@@ -7,7 +7,7 @@
 pragma solidity 0.4.24;
 
 /**
- * @title: Fruit
+ * @title Fruit
  */
 contract Fruit {
     uint public plantDate; // When the fruit is planted
@@ -15,10 +15,10 @@ contract Fruit {
     uint public ripeEnd; // End of redeemable period
 
 /**
- * @dev: constructor for a Fruit contract.
- * @param uint _plantDate : When the fruits are planted
- * @param uint8 _growingPeriod : How long the fruits take to grow in days
- * @param uint8 _ripePeriod : The shelf life of the fruits in days.
+ * @dev constructor for a Fruit contract.
+ * @param _plantDate : When the fruits are planted
+ * @param _growingPeriod : How long the fruits take to grow in days
+ * @param _ripePeriod : The shelf life of the fruits in days.
  */
     constructor(
         uint _plantDate,
@@ -31,7 +31,7 @@ contract Fruit {
         }
 
 /**
- * @dev: When the fruit is good for eating
+ * @dev When the fruit is good for eating
  * @return : true if done growing, but not expired
  */
     function isRipe() public view returns (bool) {
@@ -39,8 +39,8 @@ contract Fruit {
     }
 
 /**
- * @dev: Is the fruit ripe at a particular time?
- * @param uint _t : timestamp to check in seconds since the epoch
+ * @dev Is the fruit ripe at a particular time?
+ * @param _t : timestamp to check in seconds since the epoch
  * @return : true if fruit is done growing, but not expired at time _t
  */
     function isRipeAt(uint _t) public view returns (bool) {
@@ -48,7 +48,7 @@ contract Fruit {
     }
 
 /**
- * @dev: Is the fruit still growing
+ * @dev Is the fruit still growing
  * @return : true if fruit has been planted, but is not yet ripe
  */
     function isGrowing() public view returns (bool) {
@@ -56,8 +56,8 @@ contract Fruit {
     }
 
 /**
- * @dev: Is the fruit growing at a particular time?
- * @param uint _t : timestamp to check in seconds since the epoch
+ * @dev Is the fruit growing at a particular time?
+ * @param _t : timestamp to check in seconds since the epoch
  * @return : true if fruit has been planted, but is not yet ripe at time _t
  */
     function isGrowingAt(uint _t) public view returns (bool) {
@@ -65,7 +65,7 @@ contract Fruit {
     }
 
 /**
- * @dev: Is the fruit expired or rotten?
+ * @dev Is the fruit expired or rotten?
  * @return : true if the fruit is no longer ripe, and therefore inedible
  */
     function isExpired() public view returns (bool) {
@@ -73,8 +73,8 @@ contract Fruit {
     }
 
 /**
- * @dev: Is the fruit expired or rotten at a particular time?
- * @param uint _t : timestamp to check in seconds since the epoch
+ * @dev Is the fruit expired or rotten at a particular time?
+ * @param _t : timestamp to check in seconds since the epoch
  * @return : true if the fruit is no longer ripe at time _t
  */
     function isExpiredAt(uint _t) public view returns (bool) {
@@ -104,6 +104,4 @@ contract Fruit {
         );
         _;
     }
-
-
 }

@@ -1,4 +1,10 @@
-pragma solidity ^0.4.24;
+/**
+ * Created on: August 2018
+ * @summary: Test them fruits
+ * @author: Ann Kilzer
+ * akilzer@gmail.com
+ */
+pragma solidity 0.4.24;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
@@ -8,7 +14,7 @@ import "../contracts/Fruit.sol";
 contract TestFruit {
   function testConstructor() public {
     Fruit fruit = Fruit(DeployedAddresses.Fruit());
-    
+
     uint plantDate = 1532615474;
     uint ripeStart = plantDate + 90 days;
     uint ripeEnd = ripeStart + 10 days;
@@ -31,7 +37,7 @@ contract TestFruit {
     Assert.isTrue(fruit.isRipeAt(plantDate + 95 days), "After 95 days");
     Assert.isTrue(fruit.isRipeAt(plantDate + 99 days), "After 99 days");
     Assert.isTrue(fruit.isRipeAt(plantDate + 99 days + 23 hours + 59 minutes + 59 seconds), "After 99 days 23:59:59");
-    
+
 
     Assert.isFalse(fruit.isRipeAt(plantDate + 100 days), "After 100 days");
   }
@@ -55,7 +61,7 @@ contract TestFruit {
 
     Assert.isFalse(fruit.isExpiredAt(plantDate), "After 0 days");
     Assert.isFalse(fruit.isExpiredAt(plantDate + 90 days), "After 90 days");
-    
+
     Assert.isTrue(fruit.isExpiredAt(plantDate + 100 days), "After 100 days");
     Assert.isTrue(fruit.isExpiredAt(plantDate + 101 days), "After 101 days");
   }

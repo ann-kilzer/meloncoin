@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 
 /**
- * @title: ERC Token Standard #20 Interface
+ * @title ERC Token Standard #20 Interface
  * Modified from https://theethereum.wiki/w/index.php/ERC20_Token_Standard
  * and more details here:
  * https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
