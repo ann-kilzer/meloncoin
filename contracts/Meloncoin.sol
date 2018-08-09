@@ -4,7 +4,7 @@
  * @author: Ann Kilzer
  * akilzer@gmail.com
  */
-pragma solidity ^0.4.24;
+pragma solidity 0.4.24;
 
 import './Fruit.sol';
 import './ERC20Interface.sol';
@@ -119,8 +119,9 @@ contract Meloncoin is Fruit, ERC20Interface {
    * @param address _to : The address of the recipient
    * @param uint _tokens : The number of tokens to send, in musk
    */
-  function _transfer(address _from, address _to, uint _tokens) internal {
-    require(_to != 0x0);
+  function _transfer(address _from, address _to, uint _tokens)
+  validDestination(_to)
+  internal {
     require(!isExpired()); // When the melon rots, you can't transfer it
     require(balanceOf[_from] >= _tokens);
     require(balanceOf[_to] + _tokens >= balanceOf[_to]); // overflow check
@@ -164,7 +165,9 @@ contract Meloncoin is Fruit, ERC20Interface {
    * @param address _to : The address of the recipient
    * @param uint _tokens : Number of tokens to transfer in musk
    */
-  function transferFrom(address _from, address _to, uint _tokens) public returns (bool success) {
+  function transferFrom(address _from, address _to, uint _tokens) public
+  validDestination(_to)
+  returns (bool success) {
     require(_tokens <= allowance[_from][msg.sender]);
     allowance[_from][msg.sender] -= _tokens;
     _transfer(_from, _to, _tokens);
@@ -175,4 +178,9 @@ contract Meloncoin is Fruit, ERC20Interface {
   event Transfer(address indexed from, address indexed to, uint tokens);
   event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
 
+  modifier validDestination( address _to ) {
+    require(_to != address(0x0));
+    require(_to != address(this));
+    _;
+  }
 }

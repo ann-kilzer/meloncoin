@@ -4,7 +4,7 @@
  * @author: Ann Kilzer
  * akilzer@gmail.com
  */
-pragma solidity ^0.4.24;
+pragma solidity 0.4.24;
 
 /**
  * @title: Fruit
