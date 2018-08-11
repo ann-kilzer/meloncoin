@@ -8,6 +8,7 @@ pragma solidity 0.4.24;
 
 import './Fruit.sol';
 import './ERC20Interface.sol';
+import 'openzeppelin-solidity/contracts/lifecycle/Pausable.sol';
 
 /**
  * Inspired by the ethereum.org token, but modified to
@@ -20,7 +21,7 @@ import './ERC20Interface.sol';
  *
  * @title Meloncoin
  */
-contract Meloncoin is Fruit, ERC20Interface {
+contract Meloncoin is Fruit, ERC20Interface, Pausable {
 
   uint public totalSupply;
   uint8 public decimals = 18; // recommended by Ethereum.org
@@ -62,7 +63,7 @@ contract Meloncoin is Fruit, ERC20Interface {
  * @param _melons :  The number of melons to burn
  * @return : true if successful
  */
-  function burn(uint8 _melons) whenRipe public returns (bool) {
+  function burn(uint8 _melons) whenRipe whenNotPaused public returns (bool) {
     uint value = _melons * 10 ** uint(decimals);
     require(balanceOf[msg.sender] >= value);
     balanceOf[msg.sender] -= value;
@@ -118,6 +119,7 @@ contract Meloncoin is Fruit, ERC20Interface {
    * @param _tokens : The number of tokens to send, in musk
    */
   function _transfer(address _from, address _to, uint _tokens)
+  whenNotPaused
   validDestination(_to)
   internal {
     require(!isExpired()); // When the melon rots, you can't transfer it
@@ -136,7 +138,7 @@ contract Meloncoin is Fruit, ERC20Interface {
  * @param _tokens :  The number of tokens to send, in musk
  * @return : true if successful
  */
-  function transfer(address _to, uint _tokens) public returns (bool success) {
+  function transfer(address _to, uint _tokens) whenNotPaused public returns (bool success) {
     _transfer(msg.sender, _to, _tokens);
     return true;
   }
@@ -148,7 +150,7 @@ contract Meloncoin is Fruit, ERC20Interface {
    * @param _spender : The address to grant the allowance to
    * @param _tokens : The number of tokens to set the allowance to
    */
-  function approve(address _spender, uint _tokens) public returns (bool success) {
+  function approve(address _spender, uint _tokens) whenNotPaused public returns (bool success) {
     require(msg.sender != _spender); // Don't be a dummy
     require(!isExpired()); // When the melon rots, you can't transfer it
     allowance[msg.sender][_spender] = _tokens;
@@ -164,6 +166,7 @@ contract Meloncoin is Fruit, ERC20Interface {
    * @param _tokens : Number of tokens to transfer in musk
    */
   function transferFrom(address _from, address _to, uint _tokens) public
+  whenNotPaused
   validDestination(_to)
   returns (bool success) {
     require(_tokens <= allowance[_from][msg.sender]);
