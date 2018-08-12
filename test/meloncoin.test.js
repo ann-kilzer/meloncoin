@@ -10,6 +10,9 @@ contract('Meloncoin', function(accounts) {
     beforeEach(async function () {
 	this.plantTime = Math.floor((new Date).getTime() / 1000); // seconds since the epoch
 	this.meloncoin = await Meloncoin.new(3, this.plantTime, 90, 10, accounts[0]);
+
+	this.pastPlantTime = this.plantTime - 100 * 24 * 60 * 60; // 100 days ago
+	this.expiredMeloncoin = await Meloncoin.new(3, this.pastPlantTime, 90, 10, accounts[0]);
     });
     
     it("should launch a new meloncoin", async function() {
@@ -36,6 +39,34 @@ contract('Meloncoin', function(accounts) {
 		}
 		should.fail('Revert did not happen');
 	    });
+	});
+
+	describe("when the sender does not have enough balance", function() {
+	    const amount = 1;
+	    it("reverts", async function () {		
+		try {
+		    await this.meloncoin.transfer(accounts[2], amount, { from: accounts[1] });
+		} catch (error) {
+		    error.message.should.include('revert', `Expected "revert", got ${error} instead`);
+		    return;
+		}
+		should.fail('Revert did not happen');
+	    });
+	});
+
+	describe("when the melon has rotted", function() {
+	    const amount = 105;
+	    it("reverts", async function () {		
+		try {
+		    await this.expiredMeloncoin.transfer(accounts[1], amount, { from: accounts[0] });
+		} catch (error) {
+		    error.message.should.include('revert', `Expected "revert", got ${error} instead`);
+		    return;
+		}
+		should.fail('Revert did not happen');
+	    });
 	});	
+
+	
     });
 });
