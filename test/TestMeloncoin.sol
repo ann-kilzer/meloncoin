@@ -112,7 +112,6 @@ contract TestMeloncoin {
     //Assert.isFalse(r, "Transfer to zero address should fail!");
 
     //Assert.equal(melon.balanceOf(msg.sender), startingBalance, "Sender balance after failed transfer");
-
   }
 
   function testTransferNoFunds() public {
