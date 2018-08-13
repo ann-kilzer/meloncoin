@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "name": "Takano",
+    "picture": "images/takano.jpg",
+    "variety": "Yubari Melon",
+    "location": "Hokkaido"
+  },
+  {
+    "id": 1,
+    "name": "Cube Suika",
+    "picture": "images/cubesuika.jpg",
+    "variety": "Watermelon",
+    "location": "Gunma"
+  },
+  {
+    "id": 2,
+    "name": "Kukumisu",
+    "picture": "images/kukumisu.jpg",
+    "variety": "Kukumisu",
+    "location": "Kanagawa"
+  }
+]
