@@ -51,13 +51,20 @@ App = {
     },
     
     bindEvents: function() {
-	//$(document).on('click', '.btn-plant', App.plantMelon());
-	document.getElementById('btn-plant').setAttribute('onclick', `App.plantMelon(1,2)`);
+	$(document).on('click', '.btn-plant', App.plantMelon);
     },
     
-    plantMelon: function(melons, index) {
+    plantMelon: function(event) {
+	event.preventDefault();
+
+	var index = parseInt($(event.target).data('id'));
+	var melons = 3 // todo read from form
+	var melonDiv = document.getElementsByClassName('panel-body')[index]
+	
 	var farm;
 
+	alert(index)
+	
 	web3.eth.getAccounts(function(error, accounts) {
 	    if (error) {
 		console.log(error);
@@ -65,8 +72,8 @@ App = {
 	    
 	    var account = accounts[0];
 	    var plantTime = Math.floor((new Date).getTime() / 1000); // seconds since the epoch
-	    var plantDays = document.getElementsByClassName("melon-grow-period")[index].innerText
-	    var ripeDays = document.getElementsByClassName("melon-ripe-period")[index].innerText
+	    var plantDays = melonDiv.getElementsByClassName("melon-grow-period")[0].innerText
+	    var ripeDays = melonDiv.getElementsByClassName("melon-ripe-period")[0].innerText
 	    
 	    
 	    App.contracts.MelonFarm.deployed().then(function(instance) {
