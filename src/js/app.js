@@ -13,6 +13,9 @@ App = {
 		melonTemplate.find('img').attr('src', data[i].picture);
 		melonTemplate.find('.melon-variety').text(data[i].variety);
 		melonTemplate.find('.melon-location').text(data[i].location);
+		melonTemplate.find('.melon-grow-period').text(data[i].growing_period);
+		melonTemplate.find('.melon-ripe-period').text(data[i].ripe_period);
+		melonTemplate.find('.btn-plant').attr('data-id', i);
 		
 		melonsRow.append(melonTemplate.html());
 	    }
@@ -48,10 +51,11 @@ App = {
     },
     
     bindEvents: function() {
-	$(document).on('click', '.btn-plant', App.plantMelon);
+	//$(document).on('click', '.btn-plant', App.plantMelon());
+	document.getElementById('btn-plant').setAttribute('onclick', `App.plantMelon(1,2)`);
     },
     
-    plantMelon: function() {
+    plantMelon: function(melons, index) {
 	var farm;
 
 	web3.eth.getAccounts(function(error, accounts) {
@@ -61,12 +65,14 @@ App = {
 	    
 	    var account = accounts[0];
 	    var plantTime = Math.floor((new Date).getTime() / 1000); // seconds since the epoch
-
+	    var plantDays = document.getElementsByClassName("melon-grow-period")[index].innerText
+	    var ripeDays = document.getElementsByClassName("melon-ripe-period")[index].innerText
+	    
 	    
 	    App.contracts.MelonFarm.deployed().then(function(instance) {
 		farm = instance;
 		
-		return farm.launchMeloncoin(10, plantTime, 90, 10, {from: account});
+		return farm.launchMeloncoin(melons, plantTime, plantDays, ripeDays, {from: account});
 	    }).catch(function(err) {
 		console.log(err.message);
 	    });

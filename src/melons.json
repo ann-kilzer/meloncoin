@@ -1,23 +1,29 @@
 [
-  {
-    "id": 0,
-    "name": "Takano",
-    "picture": "images/takano.jpg",
-    "variety": "Yubari Melon",
-    "location": "Hokkaido"
-  },
-  {
-    "id": 1,
-    "name": "Cube Suika",
-    "picture": "images/cubesuika.jpg",
-    "variety": "Watermelon",
-    "location": "Gunma"
-  },
-  {
-    "id": 2,
-    "name": "Kukumisu",
-    "picture": "images/kukumisu.jpg",
-    "variety": "Kukumisu",
-    "location": "Kanagawa"
-  }
+    {
+	"id": 0,
+	"name": "Takano",
+	"picture": "images/takano.jpg",
+	"variety": "Yubari Melon",
+	"growing_period": 90,
+	"ripe_period": 10,
+	"location": "Hokkaido"
+    },
+    {
+	"id": 1,
+	"name": "Cube Suika",
+	"picture": "images/cubesuika.jpg",
+	"variety": "Watermelon",
+	"growing_period": 85,
+	"ripe_period": 14,
+	"location": "Gunma"
+    },
+    {
+	"id": 2,
+	"name": "Kukumisu",
+	"picture": "images/kukumisu.jpg",
+	"variety": "Kukumisu",
+	"growing_period": 70,
+	"ripe_period":7,
+	"location": "Kanagawa"
+    }
 ]
