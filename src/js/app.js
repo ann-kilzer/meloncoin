@@ -58,12 +58,10 @@ App = {
 	event.preventDefault();
 
 	var index = parseInt($(event.target).data('id'));
-	var melons = 3 // todo read from form
+	var melons = melonplanter[index].seeds.value // todo: validation
 	var melonDiv = document.getElementsByClassName('panel-body')[index]
 	
 	var farm;
-
-	alert(index)
 	
 	web3.eth.getAccounts(function(error, accounts) {
 	    if (error) {
@@ -72,14 +70,15 @@ App = {
 	    
 	    var account = accounts[0];
 	    var plantTime = Math.floor((new Date).getTime() / 1000); // seconds since the epoch
-	    var plantDays = melonDiv.getElementsByClassName("melon-grow-period")[0].innerText
+	    var growDays = melonDiv.getElementsByClassName("melon-grow-period")[0].innerText
 	    var ripeDays = melonDiv.getElementsByClassName("melon-ripe-period")[0].innerText
-	    
+
+	    console.log(`About to create ${melons} melons worth of tokens with a growing season of ${growDays} days and ripe period of ${ripeDays} days.`);
 	    
 	    App.contracts.MelonFarm.deployed().then(function(instance) {
 		farm = instance;
 		
-		return farm.launchMeloncoin(melons, plantTime, plantDays, ripeDays, {from: account});
+		return farm.launchMeloncoin(melons, plantTime, growDays, ripeDays, {from: account});
 	    }).catch(function(err) {
 		console.log(err.message);
 	    });
