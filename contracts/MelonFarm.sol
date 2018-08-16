@@ -33,4 +33,9 @@ contract MelonFarm {
     deployed.push(latest);
     return latest;
   }
+
+  function getDeployed() public view returns (Meloncoin[]) {
+    return deployed;
+  }
 }
+

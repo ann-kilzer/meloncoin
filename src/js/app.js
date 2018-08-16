@@ -1,6 +1,7 @@
 App = {
     web3Provider: null,
     contracts: {},
+    meloncoins: [],
     
     init: function() {
 	// Load melons.
@@ -47,7 +48,27 @@ App = {
 	    App.contracts.MelonFarm.setProvider(App.web3Provider);
 	
 	});
+	App.loadMeloncoins()
 	return App.bindEvents();
+    },
+
+    loadMeloncoins: function() {
+	web3.eth.getAccounts(function(error, accounts) {
+	    if (error) {
+		console.log(error);
+	    }
+
+	    var account = accounts[0];
+	    App.contracts.MelonFarm.deployed().then(function(instance) {
+		farm = instance;
+		
+		return farm.getDeployed()
+	    }).then(function(result) {
+		console.log(result)
+	    }).catch(function(err) {
+		console.log(err.message);
+	    });
+	});
     },
     
     bindEvents: function() {
@@ -79,12 +100,20 @@ App = {
 		farm = instance;
 		
 		return farm.launchMeloncoin(melons, plantTime, growDays, ripeDays, {from: account});
+	    }).then(function(result) {
+		return App.addMeloncoin(result)
 	    }).catch(function(err) {
 		console.log(err.message);
 	    });
 	});
+    },
+
+    addMeloncoin: function(meloncoin) {
+	var meloncoinInstance;
+
+	console.log(meloncoin)
+	App.meloncoins.push(meloncoin) 
     }
-    
 };
 
 $(function() {
