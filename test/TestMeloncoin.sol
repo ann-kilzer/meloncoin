@@ -10,7 +10,6 @@ import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
 import "../contracts/Meloncoin.sol";
 import "../contracts/MelonFarm.sol";
-import "./ThrowProxy.sol";
 import "./MelonSpenderProxy.sol";
 
 contract TestMeloncoin {
@@ -95,44 +94,6 @@ contract TestMeloncoin {
     Assert.equal(melon.balanceOf(this), startingBalance - tokens, "Sender balance after transfer");
   }
 
-  function testTransferInvalidAddress() public {
-    MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
-    Meloncoin melon = farm.launchMeloncoin(melons, plantDate, 90, 20);
-
-    uint startingBalance = melon.balanceOf(this);
-
-    Assert.isFalse(melon.isExpired(), "Not yet expired");
-
-    uint tokens = 1;
-    address zero = 0x0; // invalid address
-
-    //ThrowProxy throwproxy = new ThrowProxy(address(melon));
-    //Meloncoin(address(throwproxy)).transfer(zero, tokens);
-    //bool r = throwproxy.execute.gas(600000)();
-    //Assert.isFalse(r, "Transfer to zero address should fail!");
-
-    //Assert.equal(melon.balanceOf(msg.sender), startingBalance, "Sender balance after failed transfer");
-  }
-
-  function testTransferNoFunds() public {
-    MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
-    Meloncoin melon = farm.launchMeloncoin(melons, plantDate, 90, 20);
-
-    uint startingBalance = melon.balanceOf(this);
-
-    uint foxStartingBalance = melon.balanceOf(fox);
-
-    Assert.isFalse(melon.isExpired(), "Not yet expired");
-
-    // failed transfer due to insufficient funds
-    //uint tokens = startingBalance + 1;
-    //Assert.isFalse(melon.transfer(fox, tokens), "Transfer failed");
-    //Assert.equal(melon.balanceOf(fox), 0, "Fox balance after transfer");
-    //Assert.equal(melon.balanceOf(msg.sender), startingBalance, "Sender balance after failed transfer");
-
-  }
-
-  // Not sure if I can test this one without switching accounts...
   function testTransferFrom() public {
     MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
     Meloncoin melon = farm.launchMeloncoin(melons, plantDate, 90, 20);
