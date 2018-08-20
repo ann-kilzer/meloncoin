@@ -22,6 +22,8 @@ App = {
       }
     });
 
+    App.syncMeloncoinsWithWeb3();
+
     return App.initWeb3();
   },
 
@@ -113,6 +115,37 @@ App = {
 
     console.log(meloncoin)
     App.meloncoins.push(meloncoin)
+
+    return App.reloadMeloncoins()
+  },
+
+  syncMeloncoinsWithWeb3() {
+    web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+      App.contracts.MelonFarm.deployed().then(function(instance) {
+        farm = instance;
+
+        return farm.getDeployed();
+      }
+    ).then(function(result) {
+      App.meloncoins = result;
+      App.reloadMeloncoins();
+    });
+  });
+},
+
+  reloadMeloncoins: function() {
+    console.log(App.meloncoins.length); // todo: need to sync with web3
+    var meloncoinsRow = $('#meloncoinsRow');
+    var activeMeloncoins = $('#activeMeloncoins');
+    for (i = 0; i < App.meloncoins.length; i ++) {
+      console.log(App.meloncoins[i]);
+      activeMeloncoins.find('.meloncoin-addr').text(App.meloncoins[i]);
+
+      meloncoinsRow.append(activeMeloncoins.html());
+    };
   }
 };
 
