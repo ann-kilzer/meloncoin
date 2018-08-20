@@ -10,7 +10,7 @@ Why melons? I live in Japan, and fruit is incredibly expensive here. It's not ju
 
 While this fruit-based cryptocurrency is somewhat whimsical, the concept of an expiring token is generalizable. Consider concert tickets, video game pre-sales, or any item where the product peaks at a specific point in time. Value builds until that moment and no further.
 
-When I researched expiring tokens, there wasn't much out there, aside from a [stack exchange thread](https://ethereum.stackexchange.com/questions/27379/is-it-possible-to-create-an-expiring-ephemeral-erc-20-token) and an [article from ConsenSys](https://medium.com/@ConsenSys/tokens-on-ethereum-e9e61dac9b4e) pointing to some [dead (expired?)](http://inflekt.us/) [links](http://farmshare.space/). Please send more my way if you fine anything.
+When I researched expiring tokens, there wasn't much out there, aside from a [stack exchange thread](https://ethereum.stackexchange.com/questions/27379/is-it-possible-to-create-an-expiring-ephemeral-erc-20-token) and an [article from ConsenSys](https://medium.com/@ConsenSys/tokens-on-ethereum-e9e61dac9b4e) pointing to some [dead (expired?)](http://inflekt.us/) [links](http://farmshare.space/). Please send more my way if you find anything.
 
 
 Prerequisites:
@@ -60,3 +60,5 @@ npm run dev
 ```
 
 Open up your browser at http://localhost:3000/ to see the app!
+
+You can add the number of melons to mint and click submit to deploy a new Meloncoin contract starting now. Note you may have to refresh the page to see the updated list of meloncoin contracts.
