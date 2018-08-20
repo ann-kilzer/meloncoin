@@ -31,11 +31,13 @@ contract MelonFarm {
     Meloncoin latest = new Meloncoin(_initialSupply, _plantDate, _growingPeriod, _ripePeriod,
 				     msg.sender);
     deployed.push(latest);
+    emit NewMeloncoin(latest, _initialSupply, _plantDate, _growingPeriod, _ripePeriod);
     return latest;
   }
 
   function getDeployed() public view returns (Meloncoin[]) {
     return deployed;
   }
-}
 
+  event NewMeloncoin(address newAddress, uint8 melons, uint plantDate, uint8 growingPeriod, uint8 ripePeriod);
+}
