@@ -1,7 +1,7 @@
 [
     {
 	"id": 0,
-	"name": "Takano",
+	"name": "Meloncoin Original",
 	"picture": "images/takano.jpg",
 	"variety": "Yubari Melon",
 	"growing_period": 90,
@@ -10,7 +10,7 @@
     },
     {
 	"id": 1,
-	"name": "Cube Suika",
+	"name": "Meloncoin BLOCK",
 	"picture": "images/cubesuika.jpg",
 	"variety": "Watermelon",
 	"growing_period": 85,
@@ -19,11 +19,20 @@
     },
     {
 	"id": 2,
-	"name": "Kukumisu",
+	"name": "Meloncoin Kawaii",
 	"picture": "images/kukumisu.jpg",
 	"variety": "Kukumisu",
 	"growing_period": 70,
 	"ripe_period":7,
 	"location": "Kanagawa"
+    },
+    {
+        "id": 3,
+        "name": "Meloncoin HARD",
+        "picture": "images/densuke.jpg",
+        "variety": "Densuke",
+        "growing_period": 100,
+        "ripe_period": 20,
+        "location": "Tokyo"
     }
 ]

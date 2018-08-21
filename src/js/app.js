@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   meloncoins: [],
+  melonWatcher: null,
 
   init: function() {
     // Load melons.
@@ -22,9 +23,9 @@ App = {
       }
     });
 
-    App.syncMeloncoinsWithWeb3();
 
-    return App.initWeb3();
+    App.initWeb3();
+    return App.syncMeloncoinsWithWeb3();
   },
 
   initWeb3: function() {
@@ -49,28 +50,19 @@ App = {
       // Set the provider for our contract
       App.contracts.MelonFarm.setProvider(App.web3Provider);
 
-    });
-    App.loadMeloncoins()
-    return App.bindEvents();
-  },
-
-  loadMeloncoins: function() {
-    web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-
-      var account = accounts[0];
+      // Watch for newly planted meloncoins
       App.contracts.MelonFarm.deployed().then(function(instance) {
-        farm = instance;
-
-        return farm.getDeployed()
-      }).then(function(result) {
-        console.log(result)
-      }).catch(function(err) {
-        console.log(err.message);
+        App.melonWatcher = instance.NewMeloncoin(function(error, result){
+          if (error) {
+            console.log(error);
+          }
+          console.log("New meloncoin detected! " + result.address);
+          console.log(result);
+          App.addMeloncoin(result.address);
+        });
       });
     });
+    return App.bindEvents();
   },
 
   bindEvents: function() {
@@ -102,21 +94,17 @@ App = {
         farm = instance;
 
         return farm.launchMeloncoin(melons, plantTime, growDays, ripeDays, {from: account});
-      }).then(function(result) {
-        return App.addMeloncoin(result)
       }).catch(function(err) {
         console.log(err.message);
       });
     });
   },
 
-  // TODO: better to make this watch for an event
   addMeloncoin: function(meloncoin) {
-    web3.eth.getTransactionReceipt(meloncoin.tx, function(error, rcpt) {
-      console.log(meloncoin);
-      console.log(rcpt);
-      //App.renderMeloncoinHTML(meloncoin);
-    });
+    console.log("addMeloncoin " + meloncoin)
+
+    App.meloncoins.push(meloncoin)
+    return App.reloadMeloncoins()
   },
 
   syncMeloncoinsWithWeb3() {
@@ -124,7 +112,8 @@ App = {
       if (error) {
         console.log(error);
       }
-      App.contracts.MelonFarm.deployed().then(function(instance) { // maybe we have to read it again?
+
+      App.contracts.MelonFarm.deployed().then(function(instance) {
         farm = instance;
 
         return farm.getDeployed();
@@ -139,17 +128,16 @@ App = {
 },
 
   reloadMeloncoins: function() {
-    console.log(App.meloncoins.length);
     var meloncoinsRow = $('#meloncoinsRow');
     var activeMeloncoins = $('#activeMeloncoins');
     meloncoinsRow.html(""); // reset it
     for (i = 0; i < App.meloncoins.length; i ++) {
-      console.log(App.meloncoins[i]);
       App.renderMeloncoinHTML(App.meloncoins[i]);
     };
   },
 
   renderMeloncoinHTML: function(meloncoinAddr) {
+    console.log("rendering meloncoin " + meloncoinAddr)
     var meloncoinsRow = $('#meloncoinsRow');
     var activeMeloncoins = $('#activeMeloncoins');
 
