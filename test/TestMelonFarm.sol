@@ -22,4 +22,19 @@ contract TestMelonFarm{
     Assert.equal(suikaSeason, farm.meloncoins(1), "Check second contract");
   }
 
+  function testGetLastDeployed() public {
+    MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
+    Meloncoin yubariSeason = farm.launchMeloncoin(10, now, 90, 10);
+    Meloncoin lastDeployed = farm.getLastDeployed();
+
+    Assert.equal(lastDeployed, yubariSeason, "Track last deployed");
+  }
+
+  function testStoreMeloncoins() public {
+    MelonFarm farm = MelonFarm(DeployedAddresses.MelonFarm());
+    uint count = farm.getDeployed().length;
+
+    farm.launchMeloncoin(10, now, 90, 10);
+    Assert.equal(farm.getDeployed().length, count + 1, "One more meloncoin");
+  }
 }

@@ -30,7 +30,9 @@ contract MelonFarm {
 			   uint8 _ripePeriod) public returns (Meloncoin) {
     Meloncoin latest = new Meloncoin(_initialSupply, _plantDate, _growingPeriod, _ripePeriod,
 				     msg.sender);
+
     meloncoins.push(latest);
+    emit NewMeloncoin(latest, _initialSupply, _plantDate, _growingPeriod, _ripePeriod);
     return latest;
   }
 
@@ -42,5 +44,6 @@ contract MelonFarm {
     uint index = meloncoins.length - 1;
     return meloncoins[index];
   }
-}
 
+  event NewMeloncoin(address newAddress, uint8 melons, uint plantDate, uint8 growingPeriod, uint8 ripePeriod);
+}
