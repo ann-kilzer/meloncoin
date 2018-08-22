@@ -13,7 +13,7 @@ import './Meloncoin.sol';
  * @title MelonFarm deploys and manages meloncoins
  */
 contract MelonFarm {
-  Meloncoin[] public deployed;
+  Meloncoin[] public meloncoins;
 
 /**
  * @dev Creates a new Meloncoin, assigning all tokens to the sender
@@ -30,12 +30,17 @@ contract MelonFarm {
 			   uint8 _ripePeriod) public returns (Meloncoin) {
     Meloncoin latest = new Meloncoin(_initialSupply, _plantDate, _growingPeriod, _ripePeriod,
 				     msg.sender);
-    deployed.push(latest);
+    meloncoins.push(latest);
     return latest;
   }
 
   function getDeployed() public view returns (Meloncoin[]) {
-    return deployed;
+    return meloncoins;
+  }
+
+  function getLastDeployed() public view returns (Meloncoin) {
+    uint index = meloncoins.length - 1;
+    return meloncoins[index];
   }
 }
 
