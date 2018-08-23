@@ -1,0 +1,5 @@
+MelonFarm is live on the Rinkeby test net, viewable on Etherscan:
+
+https://rinkeby.etherscan.io/address/0x6B58f57caF432a565B94270F3E812F8A11c93695#code
+
+You can use the getters to see the address of managed Meloncoin contracts, or call the setter to launch your own Meloncoin.
