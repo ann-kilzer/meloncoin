@@ -3,6 +3,8 @@
  * @summary: Test the MelonFarm contract
  * @author: Ann Kilzer
  * akilzer@gmail.com
+ *
+ * Tests MelonFarm in solidity and ensures it can launch a number of meloncoins.
  */
 pragma solidity 0.4.24;
 

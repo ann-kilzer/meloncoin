@@ -1,3 +1,5 @@
+// This file performs a number of tests on the MelonFarm contract manager. It
+// ensures we keep track of all meloncoins, and are able to successfully launch meloncoins.
 var MelonFarm = artifacts.require("MelonFarm");
 var Meloncoin = artifacts.require("Meloncoin");
 
@@ -17,7 +19,7 @@ contract('MelonFarm', function(accounts) {
 	    var meloncoin = Meloncoin.at(address);
 	    var total = await meloncoin.totalSupply();
 	    var expectedTotal = 10000000000000000000;
-	    assert.equal(total.valueOf(), expectedTotal, "Total supply wasn't 10*10^18"); 
+	    assert.equal(total.valueOf(), expectedTotal, "Total supply wasn't 10*10^18");
 	});
     });
     it("should track all meloncoins", function () {

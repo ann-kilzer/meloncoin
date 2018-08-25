@@ -1,3 +1,6 @@
+// Here's an example of testing the fruit contract in JavaScript. It does a simple
+// check of setting a plantDate.
+
 var Fruit = artifacts.require("Fruit");
 
 contract('Fruit', function(accounts) {
@@ -9,4 +12,3 @@ contract('Fruit', function(accounts) {
 	});
     });
 });
-    

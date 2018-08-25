@@ -1,3 +1,8 @@
+// JavaScript gives us the functionality to test failure cases of solidity. There
+// are a couple of very important tests in here, ensuring failure on sending to
+// a bad address, sending tokens you don't have, and making sure we can't overflow
+// by inputting the maximum possible uint16.
+
 var Meloncoin = artifacts.require("Meloncoin.sol");
 
 const should = require('chai')

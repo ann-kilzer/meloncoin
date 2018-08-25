@@ -3,6 +3,10 @@
  * @summary: Test Meloncoin
  * @author: Ann Kilzer
  * akilzer@gmail.com
+ *
+ * This file performs a breadth of tests on success cases in solidity. It tests
+ * all functions of Meloncoin, but solidity is unable to handle failure cases, so
+ * those tests are in meloncoin.test.js.
  */
 pragma solidity 0.4.24;
 

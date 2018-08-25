@@ -3,6 +3,11 @@
  * @summary: Test them fruits
  * @author: Ann Kilzer
  * akilzer@gmail.com
+ *
+ * Basic tests of the fruit contract, verifying the helper functions on the fruit's
+ * ripeness or expiration. I don't want to make the tests time dependant because of the
+ * hardcoded timestamp in the migrations file, but I use helper methods that optionally take
+ * a timestamp parameter to ensure proper test coverage.
  */
 pragma solidity 0.4.24;
 
