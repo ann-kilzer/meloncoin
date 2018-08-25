@@ -61,4 +61,4 @@ npm run dev
 
 Open up your browser at http://localhost:3000/ to see the app!
 
-You can add the number of melons to mint and click submit to deploy a new Meloncoin contract starting now. Note you may have to refresh the page to see the updated list of meloncoin contracts.
+You can add the number of melons to mint and click submit to deploy a new Meloncoin contract starting now. The page will update to show the address of the newly launched Meloncoin contract. On a public net or testnet, you can import this address into any wallet manager that understands ERC20 (like Mist or Metamask) to interact with the tokens.
