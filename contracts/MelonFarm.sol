@@ -24,7 +24,7 @@ contract MelonFarm {
  * period in which meloncoin can be redeemed for an investment-grade melon
  * @return : a new Meloncoin contract
  */
-  function launchMeloncoin(uint8 _initialSupply,
+  function launchMeloncoin(uint16 _initialSupply,
 			   uint _plantDate,
 			   uint8 _growingPeriod,
 			   uint8 _ripePeriod) public returns (Meloncoin) {
@@ -45,5 +45,5 @@ contract MelonFarm {
     return meloncoins[index];
   }
 
-  event NewMeloncoin(address newAddress, uint8 melons, uint plantDate, uint8 growingPeriod, uint8 ripePeriod);
+  event NewMeloncoin(address newAddress, uint16 melons, uint plantDate, uint8 growingPeriod, uint8 ripePeriod);
 }

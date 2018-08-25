@@ -14,7 +14,7 @@ import "./MelonSpenderProxy.sol";
 
 contract TestMeloncoin {
   address fox = 0x284A84baA00626e2773a1138D53923b4acAED2F4;
-  uint8 melons = 3;
+  uint16 melons = 3;
   uint supply = melons * 10 ** uint(18);
 
   uint plantDate = 1533192407;

@@ -42,7 +42,7 @@ contract Meloncoin is Fruit, ERC20Interface, Pausable {
  * period in which meloncoin can be redeemed for an investment-grade melon
  * @param _initialOwner : The account to grant the initial supply of coins
  */
-  constructor(uint8 _initialSupply,
+  constructor(uint16 _initialSupply,
               uint _plantDate,
               uint8 _growingPeriod,
               uint8 _ripePeriod,
@@ -64,7 +64,7 @@ contract Meloncoin is Fruit, ERC20Interface, Pausable {
  * @param _melons :  The number of melons to burn
  * @return : true if successful
  */
-  function burn(uint8 _melons) whenRipe whenNotPaused public returns (bool) {
+  function burn(uint16 _melons) whenRipe whenNotPaused public returns (bool) {
     uint value = melonToMusk(_melons);
     require(balanceOf[msg.sender] >= value);
     balanceOf[msg.sender] -= value;
@@ -79,7 +79,7 @@ contract Meloncoin is Fruit, ERC20Interface, Pausable {
  * @param _melons : Number of melons
  * @return : Equivalent number of musk
  */
-  function melonToMusk(uint8 _melons) public view returns (uint) {
+  function melonToMusk(uint16 _melons) public view returns (uint) {
     return SafeMath.mul(uint(_melons), (10 ** uint(decimals)));
   }
 
@@ -176,7 +176,7 @@ contract Meloncoin is Fruit, ERC20Interface, Pausable {
     return true;
   }
 
-  event Burn(address indexed from, uint8 melons, uint value);
+  event Burn(address indexed from, uint16 melons, uint value);
   event Transfer(address indexed from, address indexed to, uint tokens);
   event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
 

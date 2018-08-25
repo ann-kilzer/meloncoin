@@ -11,6 +11,7 @@ practice guide for tokens.](https://consensys.github.io/smart-contract-best-prac
 https://consensys.github.io/smart-contract-best-practices/tokens/
 
 4. Integer overflow / underflow
+I use the SafeMath library, and restrict the initial melon supply to a uint8. 
 
   - [ ] check possible overflow on initial supply calculation
   - [x] Overflow check on internal transfer
