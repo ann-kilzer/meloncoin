@@ -23,7 +23,6 @@ App = {
       }
     });
 
-
     App.initWeb3();
     return App.syncMeloncoinsWithWeb3();
   },
@@ -73,7 +72,12 @@ App = {
     event.preventDefault();
 
     var index = parseInt($(event.target).data('id'));
-    var melons = melonplanter[index].seeds.value // todo: validation
+    var melons = melonplanter[index].seeds.value
+    if (melons <= 0 || melons > 65535) {
+      alert("Invalid number of seeds. Please pick a value between 1 and 65535 inclusive.");
+      return;
+    }
+
     var melonDiv = document.getElementsByClassName('panel-body')[index]
 
     var farm;
