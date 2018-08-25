@@ -9,6 +9,7 @@ pragma solidity 0.4.24;
 import './Fruit.sol';
 import './ERC20Interface.sol';
 import 'openzeppelin-solidity/contracts/lifecycle/Pausable.sol';
+import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
 
 /**
  * Inspired by the ethereum.org token, but modified to
@@ -64,7 +65,7 @@ contract Meloncoin is Fruit, ERC20Interface, Pausable {
  * @return : true if successful
  */
   function burn(uint8 _melons) whenRipe whenNotPaused public returns (bool) {
-    uint value = _melons * 10 ** uint(decimals);
+    uint value = melonToMusk(_melons);
     require(balanceOf[msg.sender] >= value);
     balanceOf[msg.sender] -= value;
     totalSupply -= value;
@@ -79,7 +80,7 @@ contract Meloncoin is Fruit, ERC20Interface, Pausable {
  * @return : Equivalent number of musk
  */
   function melonToMusk(uint8 _melons) public view returns (uint) {
-    return uint(_melons) * 10 ** uint(decimals);
+    return SafeMath.mul(uint(_melons), (10 ** uint(decimals)));
   }
 
 /**

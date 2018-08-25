@@ -12,9 +12,8 @@ https://consensys.github.io/smart-contract-best-practices/tokens/
 
 4. Integer overflow / underflow
 
-  [ ] check possible overflow on initial supply calculation
-  
-  [X] Overflow check on internal transfer
+  - [ ] check possible overflow on initial supply calculation
+  - [x] Overflow check on internal transfer
 
 5. Safety of using timestamps:
 The granularity of meloncoin is by the day, which is a wide enough timespan to tolerate clock skew or potential manipulation by nodes without compromising integrity.
