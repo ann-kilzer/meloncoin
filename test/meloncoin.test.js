@@ -59,6 +59,7 @@ contract('Meloncoin', function(accounts) {
       });
     });
 
+    // On expiration, transfer is locked
     describe("when the melon has rotted", function() {
       const amount = 105;
       it("reverts", async function () {
@@ -72,6 +73,7 @@ contract('Meloncoin', function(accounts) {
       });
     });
 
+    // melon input is limited to uint16 to prevent overflow of musk tokens
     describe("when there are the max number of melons", function() {
       const maxUint16 = 65535; // that's plenty of melons
       it("should not overflow", async function () {
