@@ -24,7 +24,7 @@ Prerequisites:
 Runs on
 Mac OS X High Sierra 10.13.6.
 
-TODO Get running on Linux.
+Ubuntu 16.04
 
 **Setting up a local blockchain with ganache:**
 
