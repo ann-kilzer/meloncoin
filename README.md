@@ -4,7 +4,7 @@
 
 Meloncoin is an expiring cryptocurrency backed by the famously expensive Hokkaido Melon.
 
-Check out the [website](http://melonco.in) or follow the project on [twitter](https://twitter.com/meloncointoken).
+Check out the [website](http://melonco.in), follow the project on [twitter](https://twitter.com/meloncointoken), or view the [ICO video.](https://www.youtube.com/watch?v=UpzojCZfz4Q)
 
 Why melons? I live in Japan, and fruit is incredibly expensive here. It's not just for eating -- melons and other high-end fruits are given as gifts, and frequently carry price tags of upwards of $100USD and once [even reaching $27,000USD.](https://www.japantimes.co.jp/news/2016/05/26/business/hokkaido-melons-fetch-record-%C2%A53-million-seasons-first-auction/#.WL0HLBJ95PU)
 
