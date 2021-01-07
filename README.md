@@ -67,6 +67,6 @@ You can add the number of melons to mint and click submit to deploy a new Melonc
 
 A farmer in Hokkaido predicts a good crop, and wants to invite investors to help sustain her farming operations. She creates a Meloncoin contract upon planting seeds, which is a promise to deliver a quality melon upon harvest.
 
-An investor wishes to diversity from "eternal" assets like diamonds or gold, and desires something where value is tied to ephemerality. He invests in Meloncoin because it is backed by Japan's most exclusive fruit.
+An investor wishes to diversify from "eternal" assets like diamonds or gold, and desires something where value is tied to ephemerality. He invests in Meloncoin because it is backed by Japan's most exclusive fruit.
 
 A Japanese salaryman desires to purchase a Yubari Melon as a seasonal gift for his boss, but he knows he can get a better rate by pre-ordering a Meloncoin rather than purchasing through a middleman fruit vendor.
